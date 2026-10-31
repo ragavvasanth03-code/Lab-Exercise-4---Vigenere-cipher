@@ -8,7 +8,35 @@ To develop a simple C program to implement Vigenere Cipher.
 4.  It is a simple form of polyalphabetic substitution.To encrypt, a table of alphabets can be used, termed a Vigenere square, or Vigenere table.
 5.  It consists of the alphabet written out 26 times in different rows, each alphabet shifted cyclically to the left compared to the previous alphabet, corresponding to the 26 possible Caesar ciphers.
 6.  At different points in the encryption process, the cipher uses a different alphabet from one of the rows used. The alphabet 
-at each point depends on a repeating keyword. 
+at each point depends on a repeating keyword.
+# Program 
+```
+def encrypt(message, key):
+    result = ""
+    key = key.upper()
+    j = 0
+
+    for ch in message:
+        if ch.isalpha():
+            shift = ord(key[j % len(key)]) - ord('A')
+
+            if ch.isupper():
+                result += chr((ord(ch) - ord('A') + shift) % 26 + ord('A'))
+            else:
+                result += chr((ord(ch) - ord('a') + shift) % 26 + ord('a'))
+
+            j += 1
+        else:
+            result += ch
+
+    return result
+
+
+message = input("Enter message: ")
+key = input("Enter keyword: ")
+
+print("Encrypted message:", encrypt(message, key))
+```
 # Output
 <img width="1522" height="827" alt="image" src="https://github.com/user-attachments/assets/9807f10c-2005-4a4b-a4d3-6ad788da4c6e" />
 
